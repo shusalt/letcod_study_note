@@ -67,4 +67,32 @@ class Solution:
             rev = rev * 10 + digit
         
         return rev
-````
+```
+
+Rust:
+```Rust
+impl Solution {
+    pub fn reverse(x: i32) -> i32 {
+        let mut x = x;
+        let mut reversed = 0;
+
+        while x != 0 {
+            let last_digit = x % 10;
+            x /= 10;
+
+            // 检查溢出
+            if reversed > i32::MAX / 10 || (reversed == i32::MAX / 10 && last_digit > 7) {
+                return 0;
+            }
+            if reversed < i32::MIN / 10 || (reversed == i32::MIN / 10 && last_digit < -8) {
+                return 0;
+            }
+
+            reversed = reversed * 10 + last_digit;
+        }
+
+        reversed
+    }
+}
+```
+
